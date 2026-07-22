@@ -10,7 +10,7 @@ const todos = [
   ];
 
 function App() {
-  const [todoList, setToDoList] = useState (todos);
+  const [todoList, setTodoList] = useState (todos);
   return (
     <div>
       <h1>Todo List</h1>
