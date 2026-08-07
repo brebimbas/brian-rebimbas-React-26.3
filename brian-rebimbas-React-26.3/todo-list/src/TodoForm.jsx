@@ -31,7 +31,9 @@ function TodoForm ({ onAddTodo }) {
                 value={workingTodoTitle}
                 onChange={handleChange}
                 required />
-            <button type="submit">
+            <button 
+                type="submit"
+                disabled={!workingTodoTitle.trim()}>
                 Add Todo
             </button>
         </form>
