@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import TextInputWithLabel from "../../shared/TextInputWithLabel";
 import { isValidTodoTitle } from "../../utils/todoValidation";
 
 function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
   const [isEditing, setIsEditing] = useState(false);
   const [workingTitle, setWorkingTitle] = useState(todo.title);
+  const inputRef = useRef(null);
 
   function handleEdit(event) {
     setWorkingTitle(event.target.value);
@@ -34,7 +35,13 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
     <li>
       {isEditing ? (
         <form onSubmit={handleUpdate}>
-          <TextInputWithLabel value={workingTitle} onChange={handleEdit} />
+          <TextInputWithLabel
+            elementId={`todoTitle${todo.id}`}
+            labelText="Todo"
+            ref={inputRef}
+            value={workingTitle}
+            onChange={handleEdit}
+          />
 
           <button type="button" onClick={handleCancel}>
             Cancel
@@ -49,7 +56,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
           </button>
         </form>
       ) : (
-        <form>
+        <>
           <input
             type="checkbox"
             id={`checkbox${todo.id}`}
@@ -57,7 +64,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
             onChange={() => onCompleteTodo(todo.id)}
           />
           <span onClick={() => setIsEditing(true)}>{todo.title}</span>
-        </form>
+        </>
       )}
     </li>
   );
