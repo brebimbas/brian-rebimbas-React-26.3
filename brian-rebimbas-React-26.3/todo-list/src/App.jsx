@@ -11,11 +11,24 @@ const todos = [
 
 function App() {
   const [todoList, setTodoList] = useState(todos);
+
+  function updateTodo(editedTodo) {
+    const updatedTodos = todoList.map((todo) => {
+      if (todo.id === editedTodo.id) {
+        return { ...editedTodo };
+      }
+
+      return todo;
+    });
+
+    setTodoList(updatedTodos);
+  }
+
   return (
     <div>
       <h1>Todo List</h1>
       <TodoForm />
-      <TodoList todoList={todoList} />
+      <TodoList todoList={todoList} onUpdateTodo={updateTodo} />
     </div>
   );
 }
