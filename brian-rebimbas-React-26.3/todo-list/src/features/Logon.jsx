@@ -27,7 +27,11 @@ function Logon({ onSetEmail, onSetToken }) {
         onSetEmail(data.name);
         onSetToken(data.csrfToken);
       } else {
-        setAuthError(`Authentication failed: ${data?.message}`);
+        setAuthError(
+          `Authentication failed: ${
+            data?.message || "Invalid email or password"
+          }`,
+        );
       }
     } catch (error) {
       setAuthError(`Error: ${error.name} | ${error.message}`);
@@ -38,7 +42,12 @@ function Logon({ onSetEmail, onSetToken }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      {authError && <p>{authError}</p>}
+      {authError && (
+        <div role="alert">
+          <strong>Login failed</strong>
+          <p>{authError}</p>
+        </div>
+      )}
 
       <div>
         <label htmlFor="email">Email</label>
