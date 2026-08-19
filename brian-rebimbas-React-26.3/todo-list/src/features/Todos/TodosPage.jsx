@@ -1,15 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TodoList from "./TodoList/TodoList.jsx";
 import TodoForm from "./TodoForm.jsx";
 
-const todos = [
-  { id: 1, title: "review resources" },
-  { id: 2, title: "take notes" },
-  { id: 3, title: "code out app" },
-];
+function TodosPage({ token }) {
+  const [todoList, setTodoList] = useState([]);
+  const [error, setError] = useState("");
+  const [isTodoListLoading, setIsTodoListLoading] = useState(false);
 
-function TodosPage() {
-  const [todoList, setTodoList] = useState(todos);
+  useEffect(() => {
+    async function fetchTodos() {
+      setIsTodoListLoading(true);
+      setError("");
+
+      try {
+        const params = new URLSearchParams({
+          limit: 100,
+        });
+
+        const response = await fetch(`/api/tasks?${params}`, {
+          headers: {
+            "X-CSRF-TOKEN": token,
+          },
+          credentials: "include",
+        });
+
+        if (response.status === 401) {
+          throw new Error("unauthorized");
+        }
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch todos");
+        }
+
+        const data = await response.json();
+
+        setTodoList(data.tasks);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsTodoListLoading(false);
+      }
+    }
+
+    if (token) {
+      fetchTodos();
+    }
+  }, [token]);
 
   function updateTodo(editedTodo) {
     const updatedTodos = todoList.map((todo) => {
@@ -40,12 +76,20 @@ function TodosPage() {
 
   return (
     <div>
-      <TodoForm />
-      <TodoList
-        todoList={todoList}
-        onUpdateTodo={updateTodo}
-        onCompleteTodo={completeTodo}
-      />
+      {error && <p>{error}</p>}
+
+      {isTodoListLoading ? (
+        <p>Loading todos...</p>
+      ) : (
+        <>
+          <TodoForm />
+          <TodoList
+            todoList={todoList}
+            onUpdateTodo={updateTodo}
+            onCompleteTodo={completeTodo}
+          />
+        </>
+      )}
     </div>
   );
 }
