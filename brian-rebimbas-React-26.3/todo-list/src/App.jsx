@@ -1,8 +1,14 @@
 import "./App.css";
+import Header from "./shared/Header";
 import TodosPage from "./features/Todos/TodosPage";
 
 function App() {
-  return <TodosPage />;
+  return (
+    <>
+      <Header />
+      <TodosPage />
+    </>
+  );
 }
 
 export default App;
