@@ -47,13 +47,14 @@ function TodosPage({ token }) {
   }, [token]);
 
   async function addTodo(title) {
+    setError("");
+
     const newTodo = {
       id: Date.now(),
       title,
       isCompleted: false,
     };
 
-    // Optimistic update
     setTodoList((currentTodos) => [...currentTodos, newTodo]);
 
     try {
@@ -89,6 +90,7 @@ function TodosPage({ token }) {
   }
 
   async function completeTodo(todoId) {
+    setError("");
     const originalTodo = todoList.find((todo) => todo.id === todoId);
 
     if (!originalTodo) return;
@@ -126,6 +128,7 @@ function TodosPage({ token }) {
   }
 
   async function updateTodo(editedTodo) {
+    setError("");
     const originalTodo = todoList.find((todo) => todo.id === editedTodo.id);
 
     if (!originalTodo) return;
