@@ -23,17 +23,18 @@ function Logon({ onSetEmail, onSetToken }) {
 
       const data = await response.json();
 
-      if (response.status !== 200 || !data.name || !data.csrfToken) {
-        throw new Error(
-          data?.message ||
-            "Authentication failed. Please check your credentials.",
+      if (response.status === 200 && data.name && data.csrfToken) {
+        onSetEmail(data.name);
+        onSetToken(data.csrfToken);
+      } else {
+        setAuthError(
+          `Authentication failed: ${
+            data?.message || "Invalid email or password"
+          }`,
         );
       }
-
-      onSetEmail(data.name);
-      onSetToken(data.csrfToken);
     } catch (error) {
-      setAuthError(error.message);
+      setAuthError(`Error: ${error.name} | ${error.message}`);
     } finally {
       setIsLoggingOn(false);
     }
