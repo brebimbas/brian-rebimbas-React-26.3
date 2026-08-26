@@ -1,47 +1,185 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoList from "./TodoList/TodoList.jsx";
 import TodoForm from "./TodoForm.jsx";
 
-const todos = [
-  { id: 1, title: "review resources" },
-  { id: 2, title: "take notes" },
-  { id: 3, title: "code out app" },
-];
+function TodosPage({ token }) {
+  const [todoList, setTodoList] = useState([]);
+  const [error, setError] = useState("");
+  const [isTodoListLoading, setIsTodoListLoading] = useState(false);
 
-function TodosPage() {
-  const [todoList, setTodoList] = useState(todos);
+  useEffect(() => {
+    async function fetchTodos() {
+      setIsTodoListLoading(true);
+      setError("");
 
-  function updateTodo(editedTodo) {
-    const updatedTodos = todoList.map((todo) => {
-      if (todo.id === editedTodo.id) {
-        return { ...editedTodo };
+      try {
+        const params = new URLSearchParams({
+          limit: 100,
+        });
+
+        const response = await fetch(`/api/tasks?${params}`, {
+          headers: {
+            "X-CSRF-TOKEN": token,
+          },
+          credentials: "include",
+        });
+
+        if (response.status === 401) {
+          throw new Error("unauthorized");
+        }
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch todos");
+        }
+
+        const data = await response.json();
+        setTodoList(data.tasks);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsTodoListLoading(false);
+      }
+    }
+
+    if (token) {
+      fetchTodos();
+    }
+  }, [token]);
+
+  async function addTodo(title) {
+    setError("");
+
+    const newTodo = {
+      id: Date.now(),
+      title,
+      isCompleted: false,
+    };
+
+    setTodoList((currentTodos) => [...currentTodos, newTodo]);
+
+    try {
+      const response = await fetch("/api/tasks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": token,
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          title: newTodo.title,
+          isCompleted: newTodo.isCompleted,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add todo");
       }
 
-      return todo;
-    });
+      const savedTodo = await response.json();
 
-    setTodoList(updatedTodos);
+      setTodoList((currentTodos) =>
+        currentTodos.map((todo) => (todo.id === newTodo.id ? savedTodo : todo)),
+      );
+    } catch (error) {
+      setTodoList((currentTodos) =>
+        currentTodos.filter((todo) => todo.id !== newTodo.id),
+      );
+
+      setError(error.message);
+    }
   }
 
-  function completeTodo(todoId) {
-    const updatedTodos = todoList.map((todo) => {
-      if (todo.id === todoId) {
-        return {
-          ...todo,
-          isCompleted: !todo.isCompleted,
-        };
+  async function completeTodo(todoId) {
+    setError("");
+    const originalTodo = todoList.find((todo) => todo.id === todoId);
+
+    if (!originalTodo) return;
+
+    setTodoList((currentTodos) =>
+      currentTodos.map((todo) =>
+        todo.id === todoId ? { ...todo, isCompleted: true } : todo,
+      ),
+    );
+
+    try {
+      const response = await fetch(`/api/tasks/${todoId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": token,
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          isCompleted: true,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to complete todo");
       }
+    } catch (error) {
+      // Rollback
+      setTodoList((currentTodos) =>
+        currentTodos.map((todo) => (todo.id === todoId ? originalTodo : todo)),
+      );
 
-      return todo;
-    });
+      setError(error.message);
+    }
+  }
 
-    setTodoList(updatedTodos);
+  async function updateTodo(editedTodo) {
+    setError("");
+    const originalTodo = todoList.find((todo) => todo.id === editedTodo.id);
+
+    if (!originalTodo) return;
+
+    setTodoList((currentTodos) =>
+      currentTodos.map((todo) =>
+        todo.id === editedTodo.id ? editedTodo : todo,
+      ),
+    );
+
+    try {
+      const response = await fetch(`/api/tasks/${editedTodo.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": token,
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          title: editedTodo.title,
+          isCompleted: editedTodo.isCompleted,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update todo");
+      }
+    } catch (error) {
+      setTodoList((currentTodos) =>
+        currentTodos.map((todo) =>
+          todo.id === editedTodo.id ? originalTodo : todo,
+        ),
+      );
+
+      setError(error.message);
+    }
   }
 
   return (
     <div>
-      <h1>Todo List</h1>
-      <TodoForm />
+      {error && (
+        <div>
+          <p>{error}</p>
+          <button onClick={() => setError("")}>Clear Error</button>
+        </div>
+      )}
+
+      {isTodoListLoading && <p>Loading todos...</p>}
+
+      <TodoForm onAddTodo={addTodo} />
+
       <TodoList
         todoList={todoList}
         onUpdateTodo={updateTodo}
