@@ -2,9 +2,7 @@ import { useMemo } from "react";
 import TodoListItem from "./TodoListItem";
 
 function TodoList({ todoList, dataVersion, onUpdateTodo, onCompleteTodo }) {
-  const filterTodoList = useMemo(() => {
-    console.log(`Recalculating filtered todos (v${dataVersion})`);
-
+  const filteredTodoList = useMemo(() => {
     return {
       version: dataVersion,
       todos: todoList.filter((todo) => !todo.isCompleted),
@@ -13,7 +11,7 @@ function TodoList({ todoList, dataVersion, onUpdateTodo, onCompleteTodo }) {
 
   return (
     <ul>
-      {filterTodoList.todos.map((todo) => (
+      {filteredTodoList.todos.map((todo) => (
         <TodoListItem
           key={todo.id}
           todo={todo}
