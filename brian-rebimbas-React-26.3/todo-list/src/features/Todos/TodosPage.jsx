@@ -244,7 +244,10 @@ function TodosPage({ token }) {
         onSortByDirectionChange={setSortDirection}
       />
 
-      <FilterInput onFilterChange={handleFilterChange} />
+      <FilterInput
+        filterTerm={filterTerm}
+        onFilterChange={handleFilterChange}
+      />
 
       <TodoForm onAddTodo={addTodo} />
 
