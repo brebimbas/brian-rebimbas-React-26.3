@@ -2,7 +2,7 @@ function SortBy({
   sortBy,
   sortDirection,
   onSortByChange,
-  onSortByDirectionChange,
+  onSortDirectionChange,
 }) {
   return (
     <div>
@@ -23,7 +23,7 @@ function SortBy({
         <select
           id="sort-direction"
           value={sortDirection}
-          onChange={(event) => onSortByDirectionChange(event.target.value)}
+          onChange={(event) => onSortDirectionChange(event.target.value)}
         >
           <option value="desc">Descending</option>
           <option value="asc">Ascending</option>

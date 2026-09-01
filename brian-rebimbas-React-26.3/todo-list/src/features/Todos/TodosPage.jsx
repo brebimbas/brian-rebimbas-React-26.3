@@ -241,7 +241,7 @@ function TodosPage({ token }) {
         sortBy={sortBy}
         sortDirection={sortDirection}
         onSortByChange={setSortBy}
-        onSortByDirectionChange={setSortDirection}
+        onSortDirectionChange={setSortDirection}
       />
 
       <FilterInput
