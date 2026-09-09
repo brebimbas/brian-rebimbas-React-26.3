@@ -15,7 +15,7 @@ export const TODO_ACTIONS = {
   SET_FILTER: "SET_FILTER",
   CLEAR_ERROR: "CLEAR_ERROR",
   CLEAR_FILTER_ERROR: "CLEAR_FILTER_ERROR",
-  RESET_FILTER: "RESET_FILTER",
+  RESET_FILTERS: "RESET_FILTERS",
 };
 export const initialTodoState = {
   todoList: [],
@@ -158,7 +158,7 @@ export function todoReducer(state, action) {
         filterError: "",
       };
 
-    case TODO_ACTIONS.RESET_FILTER:
+    case TODO_ACTIONS.RESET_FILTERS:
       return {
         ...state,
         sortBy: "createdAt",
