@@ -160,6 +160,7 @@ export function todoReducer(state, action) {
       return {
         ...state,
         filterTerm: action.payload,
+        filterError: "",
       };
 
     case TODO_ACTIONS.CLEAR_ERROR:
