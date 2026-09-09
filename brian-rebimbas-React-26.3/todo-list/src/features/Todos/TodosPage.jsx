@@ -4,12 +4,12 @@ import TodoForm from "./TodoForm.jsx";
 import SortBy from "../../shared/SortBy.jsx";
 import FilterInput from "../../shared/FilterInput.jsx";
 import useDebounce from "../../utils/useDebounce.js";
+import { useAuth } from "../../contexts/AuthContext.jsx";
 import {
   todoReducer,
   initialTodoState,
   TODO_ACTIONS,
 } from "../../reducers/todoReducer.js";
-import { useAuth } from "../../contexts/AuthContext.jsx";
 
 function TodosPage() {
   const { token } = useAuth();
@@ -81,10 +81,11 @@ function TodosPage() {
           },
         });
       } catch (error) {
-        const isFilterError =
+        const isFilterError = Boolean(
           debouncedFilterTerm ||
           sortBy !== "createdAt" ||
-          sortDirection !== "desc";
+          sortDirection !== "asc",
+        );
 
         dispatch({
           type: TODO_ACTIONS.FETCH_ERROR,
@@ -245,7 +246,6 @@ function TodosPage() {
       {error && (
         <div>
           <p>{error}</p>
-
           <button
             onClick={() =>
               dispatch({
@@ -261,7 +261,6 @@ function TodosPage() {
       {filterError && (
         <div>
           <p>{filterError}</p>
-
           <button
             onClick={() =>
               dispatch({
