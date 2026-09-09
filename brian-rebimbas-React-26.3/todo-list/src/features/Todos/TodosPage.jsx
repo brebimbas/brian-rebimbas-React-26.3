@@ -76,7 +76,9 @@ function TodosPage() {
 
         dispatch({
           type: TODO_ACTIONS.FETCH_SUCCESS,
-          payload: data.tasks,
+          payload: {
+            todos: data.tasks,
+          },
         });
       } catch (error) {
         const isFilterError =
