@@ -2,21 +2,27 @@ export const TODO_ACTIONS = {
   FETCH_START: "FETCH_START",
   FETCH_SUCCESS: "FETCH_SUCCESS",
   FETCH_ERROR: "FETCH_ERROR",
+
   ADD_TODO_START: "ADD_TODO_START",
   ADD_TODO_SUCCESS: "ADD_TODO_SUCCESS",
   ADD_TODO_ERROR: "ADD_TODO_ERROR",
+
   UPDATE_TODO_START: "UPDATE_TODO_START",
   UPDATE_TODO_SUCCESS: "UPDATE_TODO_SUCCESS",
   UPDATE_TODO_ERROR: "UPDATE_TODO_ERROR",
+
   COMPLETE_TODO_START: "COMPLETE_TODO_START",
   COMPLETE_TODO_SUCCESS: "COMPLETE_TODO_SUCCESS",
   COMPLETE_TODO_ERROR: "COMPLETE_TODO_ERROR",
+
   SET_SORT: "SET_SORT",
   SET_FILTER: "SET_FILTER",
+
   CLEAR_ERROR: "CLEAR_ERROR",
   CLEAR_FILTER_ERROR: "CLEAR_FILTER_ERROR",
   RESET_FILTERS: "RESET_FILTERS",
 };
+
 export const initialTodoState = {
   todoList: [],
   error: "",
@@ -27,6 +33,7 @@ export const initialTodoState = {
   filterTerm: "",
   dataVersion: 0,
 };
+
 export function todoReducer(state, action) {
   switch (action.type) {
     case TODO_ACTIONS.FETCH_START:
@@ -56,6 +63,7 @@ export function todoReducer(state, action) {
       return {
         ...state,
         error: "",
+        isTodoListLoading: true,
         todoList: [...state.todoList, action.payload],
       };
 
@@ -65,6 +73,7 @@ export function todoReducer(state, action) {
         todoList: state.todoList.map((todo) =>
           todo.id === action.payload.tempId ? action.payload.saveTodo : todo,
         ),
+        isTodoListLoading: false,
         dataVersion: state.dataVersion + 1,
       };
 
@@ -74,6 +83,7 @@ export function todoReducer(state, action) {
         todoList: state.todoList.filter(
           (todo) => todo.id !== action.payload.tempId,
         ),
+        isTodoListLoading: false,
         error: action.payload.error,
       };
 
@@ -81,6 +91,7 @@ export function todoReducer(state, action) {
       return {
         ...state,
         error: "",
+        isTodoListLoading: true,
         todoList: state.todoList.map((todo) =>
           todo.id === action.payload.updatedTodo.id
             ? action.payload.updatedTodo
@@ -91,6 +102,7 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.UPDATE_TODO_SUCCESS:
       return {
         ...state,
+        isTodoListLoading: false,
         dataVersion: state.dataVersion + 1,
       };
 
@@ -102,6 +114,7 @@ export function todoReducer(state, action) {
             ? action.payload.originalTodo
             : todo,
         ),
+        isTodoListLoading: false,
         error: action.payload.error,
       };
 
@@ -109,6 +122,7 @@ export function todoReducer(state, action) {
       return {
         ...state,
         error: "",
+        isTodoListLoading: true,
         todoList: state.todoList.map((todo) =>
           todo.id === action.payload.todoId
             ? { ...todo, isCompleted: true }
@@ -119,6 +133,7 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.COMPLETE_TODO_SUCCESS:
       return {
         ...state,
+        isTodoListLoading: false,
         dataVersion: state.dataVersion + 1,
       };
 
@@ -130,6 +145,7 @@ export function todoReducer(state, action) {
             ? action.payload.originalTodo
             : todo,
         ),
+        isTodoListLoading: false,
         error: action.payload.error,
       };
 
