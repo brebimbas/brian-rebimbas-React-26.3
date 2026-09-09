@@ -1,29 +1,22 @@
-import { act } from "react";
-
 export const TODO_ACTIONS = {
   FETCH_START: "FETCH_START",
   FETCH_SUCCESS: "FETCH_SUCCESS",
   FETCH_ERROR: "FETCH_ERROR",
-
   ADD_TODO_START: "ADD_TODO_START",
   ADD_TODO_SUCCESS: "ADD_TODO_SUCCESS",
   ADD_TODO_ERROR: "ADD_TODO_ERROR",
-
   UPDATE_TODO_START: "UPDATE_TODO_START",
   UPDATE_TODO_SUCCESS: "UPDATE_TODO_SUCCESS",
   UPDATE_TODO_ERROR: "UPDATE_TODO_ERROR",
-
   COMPLETE_TODO_START: "COMPLETE_TODO_START",
   COMPLETE_TODO_SUCCESS: "COMPLETE_TODO_SUCCESS",
   COMPLETE_TODO_ERROR: "COMPLETE_TODO_ERROR",
-
   SET_SORT: "SET_SORT",
   SET_FILTER: "SET_FILTER",
-
   CLEAR_ERROR: "CLEAR_ERROR",
+  CLEAR_FILTER_ERROR: "CLEAR_FILTER_ERROR",
   RESET_FILTERS: "RESET_FILTER",
 };
-
 export const initialTodoState = {
   todoList: [],
   error: "",
@@ -34,7 +27,6 @@ export const initialTodoState = {
   filterTerm: "",
   dataVersion: 0,
 };
-
 export function todoReducer(state, action) {
   switch (action.type) {
     case TODO_ACTIONS.FETCH_START:
@@ -56,7 +48,8 @@ export function todoReducer(state, action) {
       return {
         ...state,
         isTodoListLoading: false,
-        error: action.payload,
+        error: action.payload.isFilterError ? "" : action.payload.message,
+        filterError: action.payload.isFilterError ? action.payload.message : "",
       };
 
     case TODO_ACTIONS.ADD_TODO_START:
@@ -157,6 +150,11 @@ export function todoReducer(state, action) {
       return {
         ...state,
         error: "",
+      };
+
+    case TODO_ACTIONS.CLEAR_FILTER_ERROR:
+      return {
+        ...state,
         filterError: "",
       };
 
