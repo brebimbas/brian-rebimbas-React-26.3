@@ -40,7 +40,7 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.FETCH_SUCCESS:
       return {
         ...state,
-        todoList: action.payload,
+        todoList: action.payload.todos,
         isTodoListLoading: false,
       };
 
