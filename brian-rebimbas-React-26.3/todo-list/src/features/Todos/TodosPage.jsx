@@ -55,14 +55,12 @@ function TodosPage() {
 
         const params = new URLSearchParams(paramsObject);
 
-        const options = {
+        const response = await fetch(`/api/tasks?${params}`, {
           headers: {
             "X-CSRF-TOKEN": token,
           },
           credentials: "include",
-        };
-
-        const response = await fetch(`/api/tasks?${params}`, options);
+        });
 
         if (response.status === 401) {
           throw new Error("unauthorized");

@@ -63,7 +63,6 @@ export function todoReducer(state, action) {
       return {
         ...state,
         error: "",
-        isTodoListLoading: true,
         todoList: [...state.todoList, action.payload],
       };
 
@@ -73,7 +72,6 @@ export function todoReducer(state, action) {
         todoList: state.todoList.map((todo) =>
           todo.id === action.payload.tempId ? action.payload.saveTodo : todo,
         ),
-        isTodoListLoading: false,
         dataVersion: state.dataVersion + 1,
       };
 
@@ -83,7 +81,6 @@ export function todoReducer(state, action) {
         todoList: state.todoList.filter(
           (todo) => todo.id !== action.payload.tempId,
         ),
-        isTodoListLoading: false,
         error: action.payload.error,
       };
 
@@ -91,7 +88,6 @@ export function todoReducer(state, action) {
       return {
         ...state,
         error: "",
-        isTodoListLoading: true,
         todoList: state.todoList.map((todo) =>
           todo.id === action.payload.updatedTodo.id
             ? action.payload.updatedTodo
@@ -102,7 +98,6 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.UPDATE_TODO_SUCCESS:
       return {
         ...state,
-        isTodoListLoading: false,
         dataVersion: state.dataVersion + 1,
       };
 
@@ -114,7 +109,6 @@ export function todoReducer(state, action) {
             ? action.payload.originalTodo
             : todo,
         ),
-        isTodoListLoading: false,
         error: action.payload.error,
       };
 
@@ -122,7 +116,6 @@ export function todoReducer(state, action) {
       return {
         ...state,
         error: "",
-        isTodoListLoading: true,
         todoList: state.todoList.map((todo) =>
           todo.id === action.payload.todoId
             ? { ...todo, isCompleted: true }
@@ -133,7 +126,6 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.COMPLETE_TODO_SUCCESS:
       return {
         ...state,
-        isTodoListLoading: false,
         dataVersion: state.dataVersion + 1,
       };
 
@@ -145,7 +137,6 @@ export function todoReducer(state, action) {
             ? action.payload.originalTodo
             : todo,
         ),
-        isTodoListLoading: false,
         error: action.payload.error,
       };
 
