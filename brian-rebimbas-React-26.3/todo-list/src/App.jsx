@@ -1,13 +1,28 @@
 import "./App.css";
 import { Routes, Route } from "react-router";
+
 import Header from "./shared/Header";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import AboutPage from "./pages/AboutPage";
+import TodosPage from "./pages/TodosPage";
+import ProfilePage from "./pages/ProfilePage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
     <>
       <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/login" element={<LoginPage />} />
 
-      <Routes>{/* Routes will go here */}</Routes>
+        <Route path="/todos" element={<TodosPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </>
   );
 }
