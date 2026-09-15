@@ -1,12 +1,16 @@
+import { useNavigate } from "react-router";
 import { useAuth } from "../contexts/AuthContext.jsx";
 
 function Logoff() {
   const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogoff = async () => {
     const result = await logout();
 
-    if (!result.success) {
+    if (result.success) {
+      navigate("/login");
+    } else {
       console.error(result.error);
     }
   };
