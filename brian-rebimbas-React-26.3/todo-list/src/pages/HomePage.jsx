@@ -1,18 +1,24 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
 
 function HomePage() {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/todos", { replace: true });
     } else {
-      navigate("/login", { replace: true });
+      navigate("/login", {
+        state: {
+          from: location,
+        },
+        replace: true,
+      });
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, location]);
 
   return (
     <div>
