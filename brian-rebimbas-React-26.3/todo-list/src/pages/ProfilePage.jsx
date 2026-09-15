@@ -15,11 +15,17 @@ function ProfilePage() {
 
   useEffect(() => {
     async function fetchTodoStats() {
-      setIsLoading(true);
-      setError("");
+      if (!token) {
+        setIsLoading(false);
+        return;
+      }
 
       try {
+        setIsLoading(true);
+        setError("");
+
         const response = await fetch("/api/tasks?limit=100", {
+          method: "GET",
           headers: {
             "X-CSRF-TOKEN": token,
           },
@@ -37,26 +43,27 @@ function ProfilePage() {
         const data = await response.json();
         const todos = data.tasks || [];
 
+        const total = todos.length;
         const completed = todos.filter((todo) => todo.isCompleted).length;
-
-        const active = todos.filter((todo) => !todo.isCompleted).length;
+        const active = total - completed;
 
         setStats({
-          total: todos.length,
+          total,
           completed,
           active,
         });
-      } catch (error) {
-        setError(error.message);
+      } catch (err) {
+        setError(`Error loading statistics: ${err.message}`);
       } finally {
         setIsLoading(false);
       }
     }
 
-    if (token) {
-      fetchTodoStats();
-    }
+    fetchTodoStats();
   }, [token]);
+
+  const completionPercentage =
+    stats.total > 0 ? Math.round((stats.completed / stats.total) * 100) : 0;
 
   return (
     <div>
@@ -64,8 +71,13 @@ function ProfilePage() {
 
       <section>
         <h2>User Information</h2>
+
         <p>
           <strong>Name:</strong> {email}
+        </p>
+
+        <p>
+          <strong>Status:</strong> Authenticated
         </p>
       </section>
 
@@ -93,6 +105,12 @@ function ProfilePage() {
             <p>
               <strong>Active:</strong> {stats.active}
             </p>
+
+            {stats.total > 0 && (
+              <p>
+                <strong>Completion:</strong> {completionPercentage}%
+              </p>
+            )}
           </div>
         )}
       </section>
