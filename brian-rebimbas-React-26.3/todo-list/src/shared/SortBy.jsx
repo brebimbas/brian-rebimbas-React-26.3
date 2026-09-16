@@ -5,9 +5,10 @@ function SortBy({
   onSortDirectionChange,
 }) {
   return (
-    <div>
-      <div>
-        <label htmlFor="sort-by">Sort by</label>
+    <div className="sort-controls">
+      <div className="control-group">
+        <label htmlFor="sort-by">Sort</label>
+
         <select
           id="sort-by"
           value={sortBy}
@@ -18,8 +19,9 @@ function SortBy({
         </select>
       </div>
 
-      <div>
+      <div className="control-group">
         <label htmlFor="sort-direction">Order</label>
+
         <select
           id="sort-direction"
           value={sortDirection}

@@ -1,0 +1,494 @@
+#root {
+  min-height: 100vh;
+}
+
+.app-container {
+  min-height: 100vh;
+}
+
+/* =========================
+   Header / Navigation
+   ========================= */
+
+header {
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid #e9e8f0;
+  padding: 1.25rem 2rem;
+  box-shadow: 0 1px 4px rgba(36, 35, 58, 0.04);
+}
+
+header h1 {
+  max-width: 1000px;
+  margin: 0 auto 1rem;
+  color: #27245c;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.navigation {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.navigation-list {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  position: relative;
+  color: #77758a;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #635bff;
+}
+
+.nav-link.active {
+  color: #635bff;
+  font-weight: 700;
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.55rem;
+  height: 2px;
+  border-radius: 999px;
+  background: #635bff;
+}
+
+/* =========================
+   Main page
+   ========================= */
+
+.page-content {
+  width: min(100% - 2rem, 1000px);
+  margin: 0 auto;
+  padding: 2.5rem 0 4rem;
+}
+
+/* =========================
+   Todo page
+   ========================= */
+
+.todo-page {
+  width: 100%;
+}
+
+.todo-page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.todo-page-header h2 {
+  margin: 0;
+  color: #29265e;
+  font-size: 2rem;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.todo-page-header p {
+  margin: 0.5rem 0 0;
+  color: #858398;
+  font-size: 0.95rem;
+}
+
+/* =========================
+   Controls
+   ========================= */
+
+.todo-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 0.75rem;
+  align-items: end;
+  margin-bottom: 1rem;
+}
+
+.filter-control,
+.status-control,
+.sort-controls {
+  margin: 0;
+}
+
+.filter-control label,
+.status-control label,
+.sort-controls label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #77758a;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.filter-control input,
+.status-control select,
+.sort-controls select {
+  width: 100%;
+  height: 42px;
+  border: 1px solid #e3e2eb;
+  border-radius: 12px;
+  background: #fff;
+  color: #35334d;
+  padding: 0 0.9rem;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.filter-control input::placeholder {
+  color: #aaa8b8;
+}
+
+.filter-control input:focus,
+.status-control select:focus,
+.sort-controls select:focus,
+.todo-form input:focus,
+.todo-edit-input:focus {
+  border-color: #817cff;
+  box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.1);
+}
+
+/* SortBy has two control groups */
+.sort-controls {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.sort-controls .control-group {
+  min-width: 145px;
+}
+
+/* =========================
+   Todo form
+   ========================= */
+
+.todo-form {
+  display: flex;
+  gap: 0.75rem;
+  align-items: end;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #e8e7ef;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(36, 35, 58, 0.04);
+}
+
+.todo-form .input-wrapper {
+  flex: 1;
+}
+
+.todo-form label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #77758a;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.todo-form input {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #e3e2eb;
+  border-radius: 11px;
+  padding: 0 0.9rem;
+  color: #35334d;
+  outline: none;
+}
+
+.todo-form button {
+  height: 44px;
+  border: 0;
+  border-radius: 11px;
+  padding: 0 1.2rem;
+  background: #635bff;
+  color: white;
+  font-weight: 600;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.todo-form button:hover:not(:disabled) {
+  background: #5149e8;
+  transform: translateY(-1px);
+}
+
+/* =========================
+   Todo list
+   ========================= */
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.todo-item {
+  list-style: none;
+  border: 1px solid #e8e7ef;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 3px 12px rgba(36, 35, 58, 0.035);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.todo-item:hover {
+  border-color: #d9d7e7;
+  box-shadow: 0 6px 20px rgba(36, 35, 58, 0.07);
+  transform: translateY(-1px);
+}
+
+.todo-item form {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.15rem;
+}
+
+/* =========================
+   Custom checkbox
+   ========================= */
+
+.todo-checkbox-label {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.todo-checkbox {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  border: 2px solid #c5c3d3;
+  border-radius: 7px;
+  background: #fff;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.todo-checkbox:hover {
+  border-color: #635bff;
+}
+
+.todo-checkbox:checked {
+  border-color: #635bff;
+  background: #635bff;
+}
+
+.todo-checkbox:checked::after {
+  content: "✓";
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* =========================
+   Todo title
+   ========================= */
+
+.todo-title {
+  flex: 1;
+  min-width: 0;
+  color: #35334d;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.todo-title:hover {
+  color: #635bff;
+}
+
+.todo-item.completed .todo-title {
+  color: #aaa8b5;
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+/* =========================
+   Edit mode
+   ========================= */
+
+.todo-edit-input {
+  flex: 1;
+  min-width: 0;
+  height: 42px;
+  border: 1px solid #e3e2eb;
+  border-radius: 10px;
+  padding: 0 0.85rem;
+  outline: none;
+}
+
+.todo-edit-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.todo-edit-actions button {
+  height: 38px;
+  border: 0;
+  border-radius: 9px;
+  padding: 0 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.todo-cancel-button {
+  background: #f1f0f5;
+  color: #646174;
+}
+
+.todo-update-button {
+  background: #635bff;
+  color: #fff;
+}
+
+.todo-cancel-button:hover {
+  background: #e8e7ee;
+}
+
+.todo-update-button:hover:not(:disabled) {
+  background: #5149e8;
+}
+
+/* =========================
+   Empty state
+   ========================= */
+
+.todo-empty {
+  margin: 1rem 0;
+  padding: 3rem 1.5rem;
+  border: 1px dashed #d9d7e5;
+  border-radius: 16px;
+  color: #888697;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* =========================
+   Error messages
+   ========================= */
+
+.todo-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid #f0caca;
+  border-radius: 12px;
+  background: #fff7f7;
+  color: #9d3d3d;
+}
+
+.todo-error p {
+  margin: 0;
+}
+
+.todo-error button {
+  border: 0;
+  border-radius: 8px;
+  padding: 0.45rem 0.7rem;
+  background: #f2dddd;
+  color: #873737;
+}
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 750px) {
+  header {
+    padding: 1rem;
+  }
+
+  .page-content {
+    width: min(100% - 1.5rem, 1000px);
+    padding-top: 1.75rem;
+  }
+
+  .todo-page-header {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+  }
+
+  .todo-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .sort-controls {
+    width: 100%;
+  }
+
+  .sort-controls .control-group {
+    flex: 1;
+  }
+
+  .todo-form {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .todo-form button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .navigation-list {
+    gap: 1rem;
+    overflow-x: auto;
+  }
+
+  .todo-page-header h2 {
+    font-size: 1.65rem;
+  }
+
+  .todo-item form {
+    padding: 0.85rem;
+  }
+
+  .todo-edit-actions {
+    flex-direction: column;
+  }
+}
