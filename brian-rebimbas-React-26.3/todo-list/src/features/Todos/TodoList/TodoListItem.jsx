@@ -5,13 +5,16 @@ import { isValidTodoTitle } from "../../../utils/todoValidation";
 function TodoListItem({ todo, onCompleteTodo, onUpdateTodo, onDeleteTodo }) {
   const [isEditing, setIsEditing] = useState(false);
   const [workingTitle, setWorkingTitle] = useState(todo.title);
+  const [validationError, setValidationError] = useState("");
 
   function handleEdit(event) {
     setWorkingTitle(event.target.value);
+    setValidationError("");
   }
 
   function handleCancel() {
     setWorkingTitle(todo.title);
+    setValidationError("");
     setIsEditing(false);
   }
 
@@ -22,11 +25,27 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo, onDeleteTodo }) {
 
     event.preventDefault();
 
+    const sanitizedTitle = workingTitle.trim();
+
+    if (!sanitizedTitle) {
+      setValidationError("Todo title is required.");
+      return;
+    }
+
+    if (!isValidTodoTitle(sanitizedTitle)) {
+      setValidationError(
+        "Please enter a valid todo title using 100 characters or less.",
+      );
+      return;
+    }
+
     onUpdateTodo({
       ...todo,
-      title: workingTitle,
+      title: sanitizedTitle,
     });
 
+    setWorkingTitle(sanitizedTitle);
+    setValidationError("");
     setIsEditing(false);
   }
 
@@ -40,7 +59,12 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo, onDeleteTodo }) {
               labelText="Todo"
               value={workingTitle}
               onChange={handleEdit}
+              maxLength={100}
             />
+
+            {validationError && (
+              <div className="todo-validation-error">{validationError}</div>
+            )}
 
             <div className="todo-edit-actions">
               <button
@@ -54,7 +78,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo, onDeleteTodo }) {
               <button
                 type="submit"
                 className="todo-update-button"
-                disabled={!isValidTodoTitle(workingTitle)}
+                disabled={!isValidTodoTitle(workingTitle.trim())}
               >
                 Update
               </button>
