@@ -35,40 +35,56 @@ function LoginPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      {authError && (
-        <div role="alert">
-          <strong>Login failed</strong>
-          <p>{authError}</p>
+    <div className="login-page">
+      <div className="login-card">
+        <div className="login-header">
+          <div className="login-icon">✓</div>
+
+          <h2>Welcome back</h2>
+
+          <p>Sign in to your Todo List account.</p>
         </div>
-      )}
 
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          required
-        />
+        {authError && (
+          <div className="login-error" role="alert">
+            <strong>Login failed</strong>
+            <p>{authError}</p>
+          </div>
+        )}
+
+        <form className="login-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          <button className="logon-button" type="submit" disabled={isLoggingOn}>
+            {isLoggingOn ? "Logging in..." : "Log On"}
+          </button>
+        </form>
       </div>
-
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          required
-        />
-      </div>
-
-      <button type="submit" disabled={isLoggingOn}>
-        {isLoggingOn ? "Logging in..." : "Log On"}
-      </button>
-    </form>
+    </div>
   );
 }
 

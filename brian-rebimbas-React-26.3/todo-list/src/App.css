@@ -1,0 +1,1221 @@
+#root {
+  min-height: 100vh;
+}
+
+.app-container {
+  min-height: 100vh;
+}
+/* =========================
+   Login Page
+   ========================= */
+
+.login-page {
+  min-height: calc(100vh - 68px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2.5rem 1rem;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+
+  padding: 2.25rem;
+
+  border: 1px solid #e8e7ef;
+  border-radius: 20px;
+
+  background: #fff;
+
+  box-shadow:
+    0 10px 35px rgba(36, 35, 58, 0.07),
+    0 2px 8px rgba(36, 35, 58, 0.03);
+}
+
+/* =========================
+   Login Header
+   ========================= */
+
+.login-header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.login-icon {
+  width: 44px;
+  height: 44px;
+
+  display: grid;
+  place-items: center;
+
+  margin: 0 auto 1rem;
+
+  border-radius: 12px;
+
+  background: #635bff;
+  color: #fff;
+
+  font-size: 1.2rem;
+  font-weight: 700;
+
+  box-shadow: 0 5px 12px rgba(99, 91, 255, 0.18);
+}
+
+.login-header h2 {
+  margin: 0;
+
+  color: #29265e;
+
+  font-size: 1.75rem;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.login-header p {
+  margin: 0.55rem 0 0;
+
+  color: #858398;
+
+  font-size: 0.9rem;
+}
+
+/* =========================
+   Login Form
+   ========================= */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.login-form label {
+  color: #555267;
+
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.login-form input {
+  width: 100%;
+  height: 45px;
+
+  padding: 0 0.9rem;
+
+  border: 1px solid #dfdee8;
+  border-radius: 10px;
+
+  background: #fff;
+  color: #35334d;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.login-form input::placeholder {
+  color: #aaa8b8;
+}
+
+.login-form input:hover {
+  border-color: #d1cfdd;
+}
+
+.login-form input:focus {
+  border-color: #817cff;
+
+  box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.1);
+}
+
+/* =========================
+   Log On Button
+   ========================= */
+
+.logon-button {
+  width: 100%;
+  height: 45px;
+
+  margin-top: 0.5rem;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #635bff;
+  color: #fff;
+
+  font-size: 0.9rem;
+  font-weight: 650;
+
+  box-shadow: 0 4px 10px rgba(99, 91, 255, 0.12);
+
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+
+.logon-button:hover:not(:disabled) {
+  background: #5149e8;
+
+  box-shadow: 0 6px 15px rgba(99, 91, 255, 0.2);
+
+  transform: translateY(-1px);
+}
+
+.logon-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.logon-button:disabled {
+  background: #aaa8c7;
+  box-shadow: none;
+}
+
+/* =========================
+   Login Error
+   ========================= */
+
+.login-error {
+  margin-bottom: 1rem;
+
+  padding: 0.8rem 0.9rem;
+
+  border: 1px solid #f0caca;
+  border-radius: 10px;
+
+  background: #fff7f7;
+  color: #9d3d3d;
+
+  font-size: 0.85rem;
+}
+
+.login-error strong {
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.login-error p {
+  margin: 0;
+}
+
+/* =========================
+   Simple Pages
+   ========================= */
+
+.simple-page {
+  width: 100%;
+}
+
+.simple-card {
+  padding: 2rem;
+
+  border: 1px solid #e8e7ef;
+  border-radius: 18px;
+
+  background: #fff;
+
+  box-shadow: 0 4px 18px rgba(36, 35, 58, 0.05);
+}
+
+.simple-page-header {
+  margin-bottom: 2rem;
+}
+
+.simple-page-header h1 {
+  margin: 0;
+
+  color: #29265e;
+
+  font-size: 2rem;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.simple-page-header p {
+  margin: 0.5rem 0 0;
+
+  color: #858398;
+  font-size: 0.95rem;
+}
+
+.simple-card section + section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #eeeef3;
+}
+
+.simple-card h2 {
+  margin: 0 0 1rem;
+
+  color: #35334d;
+  font-size: 1.1rem;
+}
+
+.simple-card ul {
+  margin: 0;
+  padding-left: 1.25rem;
+
+  color: #6f6d7e;
+}
+
+.simple-card li {
+  margin-bottom: 0.65rem;
+}
+
+.simple-card li:last-child {
+  margin-bottom: 0;
+}
+
+.simple-card li::marker {
+  color: #635bff;
+}
+
+/* =========================
+   Profile
+   ========================= */
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.profile-info > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.profile-info span {
+  color: #858398;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.profile-info strong {
+  color: #35334d;
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+
+.status-badge {
+  display: inline-flex;
+
+  width: fit-content;
+
+  padding: 0.3rem 0.65rem;
+
+  border-radius: 999px;
+
+  background: #eeecff;
+  color: #635bff !important;
+
+  font-size: 0.78rem !important;
+}
+
+/* =========================
+   Todo Statistics
+   ========================= */
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.stats-row > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.stats-row span {
+  color: #858398;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.stats-row strong {
+  color: #29265e;
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.profile-message {
+  margin: 0;
+  color: #858398;
+}
+
+.profile-error {
+  padding: 0.8rem 0.9rem;
+
+  border: 1px solid #f0caca;
+  border-radius: 10px;
+
+  background: #fff7f7;
+  color: #9d3d3d;
+}
+
+.profile-error p {
+  margin: 0;
+}
+
+/* =========================
+   404 Page
+   ========================= */
+
+.not-found-page {
+  min-height: calc(100vh - 68px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2rem 1rem;
+}
+
+.not-found-card {
+  width: 100%;
+  max-width: 600px;
+
+  padding: 2.5rem;
+
+  border: 1px solid #e8e7ef;
+  border-radius: 18px;
+
+  background: #fff;
+
+  text-align: center;
+
+  box-shadow: 0 4px 18px rgba(36, 35, 58, 0.05);
+}
+
+.not-found-code {
+  display: block;
+
+  margin-bottom: 0.5rem;
+
+  color: #635bff;
+
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1;
+
+  letter-spacing: -0.05em;
+}
+
+.not-found-card h1 {
+  margin: 0;
+
+  color: #29265e;
+
+  font-size: 1.75rem;
+}
+
+.not-found-card > p {
+  margin: 0.6rem 0 1.75rem;
+
+  color: #858398;
+}
+
+.not-found-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 0.6rem;
+}
+
+.not-found-nav a {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 0.5rem 0.8rem;
+
+  border: 1px solid #e2e1ea;
+  border-radius: 8px;
+
+  color: #625f73;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.not-found-nav a:hover {
+  border-color: #d3d0ee;
+
+  background: #f7f6ff;
+
+  color: #635bff;
+}
+
+/* =========================
+   App header
+   ========================= */
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0 1.5rem;
+  border-bottom: 1px solid #e8e7ef;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 2px 12px rgba(36, 35, 58, 0.04);
+  backdrop-filter: blur(12px);
+}
+
+.header-inner {
+  width: min(100%, 1100px);
+  min-height: 68px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+
+  color: #29265e;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.brand-icon {
+  width: 32px;
+  height: 32px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 9px;
+  background: #635bff;
+  color: #fff;
+
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* =========================
+   Navigation
+   ========================= */
+
+.navigation {
+  margin: 0;
+}
+
+.navigation-list {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  position: relative;
+
+  color: #77758a;
+  text-decoration: none;
+
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #635bff;
+}
+
+.nav-link.active {
+  color: #635bff;
+  font-weight: 650;
+}
+
+.nav-link.active::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.55rem;
+
+  height: 2px;
+  border-radius: 999px;
+  background: #635bff;
+}
+
+/* =========================
+   Main page
+   ========================= */
+
+.page-content {
+  width: min(100% - 2rem, 1000px);
+  margin: 0 auto;
+  padding: 2.5rem 0 4rem;
+}
+
+/* =========================
+   Todo page
+   ========================= */
+
+.todo-page {
+  width: 100%;
+}
+
+.todo-page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.todo-page-header h2 {
+  margin: 0;
+  color: #29265e;
+  font-size: 2rem;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.todo-page-header p {
+  margin: 0.5rem 0 0;
+  color: #858398;
+  font-size: 0.95rem;
+}
+
+/* =========================
+   Controls
+   ========================= */
+
+.todo-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 0.75rem;
+  align-items: end;
+  margin-bottom: 1rem;
+}
+
+.filter-control,
+.status-control,
+.sort-controls {
+  margin: 0;
+}
+
+.filter-control label,
+.status-control label,
+.sort-controls label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #77758a;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.filter-control input,
+.status-control select,
+.sort-controls select {
+  width: 100%;
+  height: 42px;
+  border: 1px solid #e3e2eb;
+  border-radius: 12px;
+  background: #fff;
+  color: #35334d;
+  padding: 0 0.9rem;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.filter-control input::placeholder {
+  color: #aaa8b8;
+}
+
+.filter-control input:focus,
+.status-control select:focus,
+.sort-controls select:focus,
+.todo-form input:focus,
+.todo-edit-input:focus {
+  border-color: #817cff;
+  box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.1);
+}
+
+/* SortBy has two control groups */
+.sort-controls {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.sort-controls .control-group {
+  min-width: 145px;
+}
+
+/* =========================
+   Todo form
+   ========================= */
+
+.todo-form {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #e8e7ef;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(36, 35, 58, 0.04);
+}
+
+.todo-form-input {
+  flex: 1;
+  min-width: 0;
+}
+
+.todo-form-input label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #77758a;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.todo-form-input input {
+  display: block;
+  width: 100%;
+  height: 44px;
+  border: 1px solid #e3e2eb;
+  border-radius: 11px;
+  padding: 0 0.9rem;
+  background: #fff;
+  color: #35334d;
+  outline: none;
+}
+
+.todo-form-input input::placeholder {
+  color: #aaa8b8;
+}
+
+.todo-form-input input:focus {
+  border-color: #817cff;
+  box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.1);
+}
+
+.add-todo-button {
+  flex: 0 0 auto;
+  height: 44px;
+  border: 0;
+  border-radius: 11px;
+  padding: 0 1.25rem;
+  background: #635bff;
+  color: #fff;
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.add-todo-button:hover:not(:disabled) {
+  background: #5149e8;
+  transform: translateY(-1px);
+}
+
+/* =========================
+   Todo list
+   ========================= */
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.todo-item {
+  list-style: none;
+  border: 1px solid #e8e7ef;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 3px 12px rgba(36, 35, 58, 0.035);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.todo-item:hover {
+  border-color: #d9d7e7;
+  box-shadow: 0 6px 20px rgba(36, 35, 58, 0.07);
+  transform: translateY(-1px);
+}
+
+.todo-item form {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.15rem;
+}
+
+.todo-delete-button {
+  height: 38px;
+  border: 0;
+  border-radius: 9px;
+  padding: 0 0.85rem;
+  background: #dc4c4c;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.todo-delete-button:hover {
+  background: #c43d3d;
+  transform: translateY(-1px);
+}
+
+/* =========================
+   Custom checkbox
+   ========================= */
+
+.todo-checkbox-label {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.todo-checkbox {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  border: 2px solid #c5c3d3;
+  border-radius: 7px;
+  background: #fff;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.todo-checkbox:hover {
+  border-color: #635bff;
+}
+
+.todo-checkbox:checked {
+  border-color: #635bff;
+  background: #635bff;
+}
+
+.todo-checkbox:checked::after {
+  content: "✓";
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* =========================
+   Todo title
+   ========================= */
+
+.todo-title {
+  flex: 1;
+  min-width: 0;
+  color: #35334d;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.todo-title:hover {
+  color: #635bff;
+}
+
+.todo-item.completed .todo-title {
+  color: #aaa8b5;
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+/* =========================
+   Edit mode
+   ========================= */
+
+.todo-edit-input {
+  flex: 1;
+  min-width: 0;
+  height: 42px;
+  border: 1px solid #e3e2eb;
+  border-radius: 10px;
+  padding: 0 0.85rem;
+  outline: none;
+}
+
+.todo-edit-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.todo-edit-actions button {
+  height: 38px;
+  border: 0;
+  border-radius: 9px;
+  padding: 0 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.todo-cancel-button {
+  background: #f1f0f5;
+  color: #646174;
+}
+
+.todo-update-button {
+  background: #635bff;
+  color: #fff;
+}
+
+.todo-cancel-button:hover {
+  background: #e8e7ee;
+}
+
+.todo-update-button:hover:not(:disabled) {
+  background: #5149e8;
+}
+
+/* =========================
+   Empty state
+   ========================= */
+
+.todo-empty {
+  margin: 1rem 0;
+  padding: 3rem 1.5rem;
+  border: 1px dashed #d9d7e5;
+  border-radius: 16px;
+  color: #888697;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* =========================
+   Error messages
+   ========================= */
+
+.todo-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid #f0caca;
+  border-radius: 12px;
+  background: #fff7f7;
+  color: #9d3d3d;
+}
+
+.todo-error p {
+  margin: 0;
+}
+
+.todo-error button {
+  border: 0;
+  border-radius: 8px;
+  padding: 0.45rem 0.7rem;
+  background: #f2dddd;
+  color: #873737;
+}
+
+.logoff-button {
+  height: 36px;
+  padding: 0 0.9rem;
+
+  border: 1px solid #e2e1ea;
+  border-radius: 9px;
+
+  background: #fff;
+  color: #666477;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.logoff-button:hover {
+  border-color: #d1cfea;
+  background: #f8f7fc;
+  color: #635bff;
+}
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 750px) {
+  /* Page */
+
+  .page-content {
+    width: min(100% - 1.5rem, 1000px);
+    padding-top: 1.75rem;
+    padding-bottom: 3rem;
+  }
+
+  /* Todo heading */
+
+  .todo-page-header {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+  }
+
+  .todo-page-header h2 {
+    font-size: 1.75rem;
+  }
+
+  /* Search / filters */
+
+  .todo-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .filter-control,
+  .status-control {
+    width: 100%;
+  }
+
+  .sort-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .sort-controls .control-group {
+    min-width: 0;
+  }
+
+  /* Add todo */
+
+  .todo-form {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .add-todo-button {
+    width: 100%;
+  }
+
+  /* Todo items */
+
+  .todo-item form {
+    padding: 0.9rem 1rem;
+  }
+}
+
+/* =========================
+   Tablet / Mobile Header
+   ========================= */
+
+@media (max-width: 650px) {
+  .app-header {
+    padding: 0 1rem;
+  }
+
+  .header-inner {
+    min-height: auto;
+    padding: 0.85rem 0;
+
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 0.75rem;
+  }
+
+  .header-right {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1rem;
+  }
+
+  .navigation {
+    min-width: 0;
+  }
+
+  .navigation-list {
+    gap: 1.1rem;
+  }
+
+  .nav-link.active::after {
+    bottom: -0.35rem;
+  }
+
+  .logoff-button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}
+
+/* =========================
+   Small Mobile
+   ========================= */
+
+@media (max-width: 600px) {
+  .page-content {
+    width: min(100% - 1rem, 1000px);
+    padding-top: 1.5rem;
+  }
+
+  /* Header */
+
+  .brand {
+    font-size: 1rem;
+  }
+
+  .brand-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  /* Todo form */
+
+  .todo-form {
+    padding: 0.9rem;
+  }
+
+  .todo-form-input input,
+  .add-todo-button {
+    height: 44px;
+  }
+}
+
+/* =========================
+   Very Small Phones
+   ========================= */
+
+@media (max-width: 500px) {
+  .navigation-list {
+    gap: 1rem;
+    overflow-x: auto;
+    max-width: 100%;
+    padding-bottom: 0.15rem;
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .todo-page-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .todo-page-header p {
+    font-size: 0.9rem;
+  }
+
+  .todo-item form {
+    min-height: 68px;
+    padding: 0.8rem;
+  }
+
+  .todo-title {
+    font-size: 0.95rem;
+  }
+
+  .todo-checkbox {
+    width: 21px;
+    height: 21px;
+  }
+
+  .todo-edit-actions {
+    flex-direction: column;
+  }
+}
+
+/* =========================
+   Extra Small Phones
+   ========================= */
+
+@media (max-width: 420px) {
+  .sort-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .header-right {
+    align-items: flex-start;
+  }
+
+  .navigation-list {
+    gap: 0.85rem;
+  }
+
+  .logoff-button {
+    height: 34px;
+    padding: 0 0.7rem;
+    font-size: 0.8rem;
+  }
+
+  .todo-form {
+    margin-bottom: 1.25rem;
+  }
+}

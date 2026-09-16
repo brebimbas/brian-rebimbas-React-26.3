@@ -7,6 +7,10 @@ export const TODO_ACTIONS = {
   ADD_TODO_SUCCESS: "ADD_TODO_SUCCESS",
   ADD_TODO_ERROR: "ADD_TODO_ERROR",
 
+  DELETE_TODO_START: "DELETE_TODO_START",
+  DELETE_TODO_SUCCESS: "DELETE_TODO_SUCCESS",
+  DELETE_TODO_ERROR: "DELETE_TODO_ERROR",
+
   UPDATE_TODO_START: "UPDATE_TODO_START",
   UPDATE_TODO_SUCCESS: "UPDATE_TODO_SUCCESS",
   UPDATE_TODO_ERROR: "UPDATE_TODO_ERROR",
@@ -84,6 +88,28 @@ export function todoReducer(state, action) {
         error: action.payload.error,
       };
 
+    case TODO_ACTIONS.DELETE_TODO_START:
+      return {
+        ...state,
+        error: "",
+        todoList: state.todoList.filter(
+          (todo) => todo.id !== action.payload.todoId,
+        ),
+      };
+
+    case TODO_ACTIONS.DELETE_TODO_SUCCESS:
+      return {
+        ...state,
+        dataVersion: state.dataVersion + 1,
+      };
+
+    case TODO_ACTIONS.DELETE_TODO_ERROR:
+      return {
+        ...state,
+        todoList: [...state.todoList, action.payload.originalTodo],
+        error: action.payload.error,
+      };
+
     case TODO_ACTIONS.UPDATE_TODO_START:
       return {
         ...state,
@@ -118,7 +144,7 @@ export function todoReducer(state, action) {
         error: "",
         todoList: state.todoList.map((todo) =>
           todo.id === action.payload.todoId
-            ? { ...todo, isCompleted: true }
+            ? { ...todo, isCompleted: !todo.isCompleted }
             : todo,
         ),
       };

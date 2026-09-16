@@ -15,7 +15,11 @@ function Logoff() {
     }
   };
 
-  return <button onClick={handleLogoff}>Log Off</button>;
+  return (
+    <button className="logoff-button" onClick={handleLogoff}>
+      Log Off
+    </button>
+  );
 }
 
 export default Logoff;

@@ -6,10 +6,19 @@ function Header() {
   const { isAuthenticated } = useAuth();
 
   return (
-    <header>
-      <h1>Todo List</h1>
-      <Navigation />
-      {isAuthenticated && <Logoff />}
+    <header className="app-header">
+      <div className="header-inner">
+        <div className="brand">
+          <div className="brand-icon">✓</div>
+          <span>Todo List</span>
+        </div>
+
+        <div className="header-right">
+          <Navigation />
+
+          {isAuthenticated && <Logoff />}
+        </div>
+      </div>
     </header>
   );
 }

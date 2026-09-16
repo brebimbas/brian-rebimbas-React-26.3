@@ -6,6 +6,7 @@ function TodoList({
   dataVersion,
   onUpdateTodo,
   onCompleteTodo,
+  onDeleteTodo,
   statusFilter = "all",
 }) {
   const filteredTodoList = useMemo(() => {
@@ -47,15 +48,16 @@ function TodoList({
   };
 
   return filteredTodoList.todos.length === 0 ? (
-    <p>{getEmptyMessage()}</p>
+    <p className="todo-empty">{getEmptyMessage()}</p>
   ) : (
-    <ul>
+    <ul className="todo-list">
       {filteredTodoList.todos.map((todo) => (
         <TodoListItem
           key={todo.id}
           todo={todo}
           onUpdateTodo={onUpdateTodo}
           onCompleteTodo={onCompleteTodo}
+          onDeleteTodo={onDeleteTodo}
         />
       ))}
     </ul>

@@ -158,10 +158,51 @@ function TodosPage() {
     }
   }
 
+  async function deleteTodo(todoId) {
+    const originalTodo = todoList.find((todo) => todo.id === todoId);
+
+    if (!originalTodo) return;
+
+    dispatch({
+      type: TODO_ACTIONS.DELETE_TODO_START,
+      payload: {
+        todoId,
+      },
+    });
+
+    try {
+      const response = await fetch(`/api/tasks/${todoId}`, {
+        method: "DELETE",
+        headers: {
+          "X-CSRF-TOKEN": token,
+        },
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete todo");
+      }
+
+      dispatch({
+        type: TODO_ACTIONS.DELETE_TODO_SUCCESS,
+      });
+    } catch (error) {
+      dispatch({
+        type: TODO_ACTIONS.DELETE_TODO_ERROR,
+        payload: {
+          originalTodo,
+          error: error.message,
+        },
+      });
+    }
+  }
+
   async function completeTodo(todoId) {
     const originalTodo = todoList.find((todo) => todo.id === todoId);
 
     if (!originalTodo) return;
+
+    const newCompletedStatus = !originalTodo.isCompleted;
 
     dispatch({
       type: TODO_ACTIONS.COMPLETE_TODO_START,
@@ -179,12 +220,12 @@ function TodosPage() {
         },
         credentials: "include",
         body: JSON.stringify({
-          isCompleted: true,
+          isCompleted: newCompletedStatus,
         }),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to complete todo");
+        throw new Error("Failed to update todo completion");
       }
 
       dispatch({
@@ -246,9 +287,15 @@ function TodosPage() {
   }
 
   return (
-    <div>
-      {error && (
+    <div className="todo-page">
+      <div className="todo-page-header">
         <div>
+          <h2>My Tasks</h2>
+          <p>Stay organized and get things done.</p>
+        </div>
+      </div>
+      {error && (
+        <div className="todo-error">
           <p>{error}</p>
           <button
             onClick={() =>
@@ -263,7 +310,7 @@ function TodosPage() {
       )}
 
       {filterError && (
-        <div>
+        <div className="todo-error">
           <p>{filterError}</p>
           <button
             onClick={() =>
@@ -289,35 +336,37 @@ function TodosPage() {
 
       {isTodoListLoading && <p>Loading todos...</p>}
 
-      <SortBy
-        sortBy={sortBy}
-        sortDirection={sortDirection}
-        onSortByChange={(newSortBy) =>
-          dispatch({
-            type: TODO_ACTIONS.SET_SORT,
-            payload: {
-              sortBy: newSortBy,
-              sortDirection,
-            },
-          })
-        }
-        onSortDirectionChange={(newSortDirection) =>
-          dispatch({
-            type: TODO_ACTIONS.SET_SORT,
-            payload: {
-              sortBy,
-              sortDirection: newSortDirection,
-            },
-          })
-        }
-      />
+      <div className="todo-controls">
+        <FilterInput
+          filterTerm={filterTerm}
+          onFilterChange={handleFilterChange}
+        />
 
-      <StatusFilter />
+        <StatusFilter />
 
-      <FilterInput
-        filterTerm={filterTerm}
-        onFilterChange={handleFilterChange}
-      />
+        <SortBy
+          sortBy={sortBy}
+          sortDirection={sortDirection}
+          onSortByChange={(newSortBy) =>
+            dispatch({
+              type: TODO_ACTIONS.SET_SORT,
+              payload: {
+                sortBy: newSortBy,
+                sortDirection,
+              },
+            })
+          }
+          onSortDirectionChange={(newSortDirection) =>
+            dispatch({
+              type: TODO_ACTIONS.SET_SORT,
+              payload: {
+                sortBy,
+                sortDirection: newSortDirection,
+              },
+            })
+          }
+        />
+      </div>
 
       <TodoForm onAddTodo={addTodo} />
 
@@ -326,6 +375,7 @@ function TodosPage() {
         dataVersion={dataVersion}
         onUpdateTodo={updateTodo}
         onCompleteTodo={completeTodo}
+        onDeleteTodo={deleteTodo}
         statusFilter={statusFilter}
       />
     </div>

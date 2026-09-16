@@ -21,14 +21,21 @@ export default function TodoForm({ onAddTodo }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TextInputWithLabel
-        elementId="todoTitle"
-        labelText="Todo"
-        value={workingTodoTitle}
-        onChange={handleChange}
-      />
-      <button type="submit" disabled={!isValidTodoTitle(workingTodoTitle)}>
+    <form className="todo-form" onSubmit={handleSubmit}>
+      <div className="todo-form-input">
+        <TextInputWithLabel
+          elementId="todoTitle"
+          labelText="Add a task"
+          value={workingTodoTitle}
+          onChange={handleChange}
+        />
+      </div>
+
+      <button
+        className="add-todo-button"
+        type="submit"
+        disabled={!isValidTodoTitle(workingTodoTitle)}
+      >
         Add Todo
       </button>
     </form>
