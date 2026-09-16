@@ -66,54 +66,62 @@ function ProfilePage() {
     stats.total > 0 ? Math.round((stats.completed / stats.total) * 100) : 0;
 
   return (
-    <div>
-      <h1>Profile</h1>
+    <div className="simple-page">
+      <div className="simple-card">
+        <div className="simple-page-header">
+          <h1>Profile</h1>
+          <p>Your account and Todo List activity.</p>
+        </div>
 
-      <section>
-        <h2>User Information</h2>
+        <section>
+          <h2>User Information</h2>
 
-        <p>
-          <strong>Name:</strong> {email}
-        </p>
+          <p>
+            <strong>Name:</strong> {email}
+          </p>
 
-        <p>
-          <strong>Status:</strong> Authenticated
-        </p>
-      </section>
+          <p>
+            <strong>Status:</strong>{" "}
+            <span className="status-badge">Authenticated</span>
+          </p>
+        </section>
 
-      <section>
-        <h2>Todo Statistics</h2>
+        <section>
+          <h2>Todo Statistics</h2>
 
-        {isLoading && <p>Loading statistics...</p>}
+          {isLoading && (
+            <p className="profile-message">Loading statistics...</p>
+          )}
 
-        {error && (
-          <div role="alert">
-            <p>{error}</p>
-          </div>
-        )}
+          {error && (
+            <div className="profile-error" role="alert">
+              <p>{error}</p>
+            </div>
+          )}
 
-        {!isLoading && !error && (
-          <div>
-            <p>
-              <strong>Total Todos:</strong> {stats.total}
-            </p>
-
-            <p>
-              <strong>Completed:</strong> {stats.completed}
-            </p>
-
-            <p>
-              <strong>Active:</strong> {stats.active}
-            </p>
-
-            {stats.total > 0 && (
+          {!isLoading && !error && (
+            <div className="stats-list">
               <p>
-                <strong>Completion:</strong> {completionPercentage}%
+                <strong>Total Todos:</strong> {stats.total}
               </p>
-            )}
-          </div>
-        )}
-      </section>
+
+              <p>
+                <strong>Completed:</strong> {stats.completed}
+              </p>
+
+              <p>
+                <strong>Active:</strong> {stats.active}
+              </p>
+
+              {stats.total > 0 && (
+                <p>
+                  <strong>Completion:</strong> {completionPercentage}%
+                </p>
+              )}
+            </div>
+          )}
+        </section>
+      </div>
     </div>
   );
 }
