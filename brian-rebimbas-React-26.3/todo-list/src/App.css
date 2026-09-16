@@ -273,6 +273,26 @@ header h1 {
   padding: 1rem 1.15rem;
 }
 
+.todo-delete-button {
+  height: 38px;
+  border: 0;
+  border-radius: 9px;
+  padding: 0 0.85rem;
+  background: #dc4c4c;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.todo-delete-button:hover {
+  background: #c43d3d;
+  transform: translateY(-1px);
+}
+
 /* =========================
    Custom checkbox
    ========================= */

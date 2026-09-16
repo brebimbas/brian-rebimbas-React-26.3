@@ -2,7 +2,7 @@ import { useState } from "react";
 import TextInputWithLabel from "../../../shared/TextInputWithLabel";
 import { isValidTodoTitle } from "../../../utils/todoValidation";
 
-function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
+function TodoListItem({ todo, onCompleteTodo, onUpdateTodo, onDeleteTodo }) {
   const [isEditing, setIsEditing] = useState(false);
   const [workingTitle, setWorkingTitle] = useState(todo.title);
 
@@ -78,6 +78,14 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
             <span className="todo-title" onClick={() => setIsEditing(true)}>
               {todo.title}
             </span>
+
+            <button
+              type="button"
+              className="todo-delete-button"
+              onClick={() => onDeleteTodo(todo.id)}
+            >
+              Delete
+            </button>
           </>
         )}
       </form>
